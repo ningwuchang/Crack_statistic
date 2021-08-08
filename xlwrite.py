@@ -104,9 +104,9 @@ class Book():
         
         
         self.main.write_merge(0, 0, 16, 17, 'Density Error Calculation', self.style_title)
-        self.main.write(2, 16, 'N = 1/(stdev/p)^2 * (1-p)/p', self.style0)
+        self.main.write(1, 16, 'N = 1/(stdev/p)^2 * (1-p)/p', self.style0)
         
-        self.main.write(1, 16, 'Grain size/um', self.style1)
+        self.main.write(2, 16, 'Grain size/um', self.style1)
         self.main.write(3, 16, '# of grains/image = area of an image / area of a grain', self.style1)
         self.main.write(4, 16, "N = # of GB's = # of grains/image*3 * #of images", self.style1)
         self.main.write(5, 16, 'GB Length', self.style1)
@@ -125,8 +125,8 @@ class Book():
 
         
         
-    def Write_sheet(self, namenum = 0):
-        self.main.write(str(namenum))
+    # def Write_sheet(self, namenum = 0):
+    #     self.main.write(str(namenum))
         
     # 建新页面
     def Creat_sheet(self, namenum = 0): #sheetname show in excel, nameum used in this code
@@ -142,6 +142,49 @@ class Book():
         self.sheet.write(1, 1, 'X', self.style0)
         self.sheet.write(1, 2, 'Y', self.style0)
         self.sheet.write(1, 3, 'lenth', self.style0)
+        
+        
+    def Write_sheet(self, k, CC, CLP):
+        # 'Fig_num', 'Crack_count', 'Crack_len/pixel',  'Crack_len/um', 'Ave_len/um', 'Plane_density'
+        self.main.write(k+1, 0, k, self.style1)
+        self.main.write(k+1, 1, CC, self.style1)
+        self.main.write(k+1, 2, CLP, self.style1)
+        fomula_CL = 'C' + str(k+2) +'*I3'
+        fomula_AL = 'D' + str(k+2) +'/B' +str(k+2)
+        fomula_PD = 'D' + str(k+2) +'/M4'
+        self.main.write(k+1, 3, xlwt.Formula(fomula_CL), self.style1)
+        self.main.write(k+1, 4, xlwt.Formula(fomula_AL), self.style1)
+        self.main.write(k+1, 5, xlwt.Formula(fomula_PD), self.style1)
+        
+    def Write_result(self, num_h, num_w, GB):
+        # 图像数和总面积
+        self.main.write(4, 8, xlwt.Formula('MAX(A3:A999)'), self.style_data)
+        areaA = str(num_h) + '*' + str(num_w) + '*I5'
+        area0 = '(' + str(num_h) + '*' + str(num_w) + ')*I3^2'
+        self.main.write(2, 12, xlwt.Formula(areaA), self.style_data)
+        self.main.write(3, 12, xlwt.Formula('M3*I3^2'), self.style_data)
+        self.main.write(4, 12, xlwt.Formula('M4/10^6'), self.style_data)
+        self.main.write(1, 13, xlwt.Formula(area0), self.style_data)
+        
+        self.main.write(2, 9, xlwt.Formula('SUM(D3:D999)'), self.style_data)
+        self.main.write(4, 9, xlwt.Formula('SUM(B3:B999)'), self.style_data)
+        self.main.write(2, 10, xlwt.Formula('J3/M5'), self.style_data)
+        self.main.write(2, 11, xlwt.Formula('J5/M5'), self.style_data)
+        
+        # 误差计算
+        self.main.write(2, 17, GB, self.style1)
+        self.main.write(3, 17, xlwt.Formula('N2/ (PI()*(R3/2)^2)'), self.style1)
+        self.main.write(4, 17, xlwt.Formula('R4*3*I5'), self.style1)
+        self.main.write(5, 17, xlwt.Formula('R5*R3/2'), self.style1)
+        self.main.write(6, 17, xlwt.Formula('J5/R5'), self.style1)
+        self.main.write(7, 17, xlwt.Formula('SQRT(1/R5*(1-R7)/R7)*R7'), self.style1)
+        self.main.write(8, 17, xlwt.Formula('R8/R7'), self.style1)
+        self.main.write(9, 17, xlwt.Formula('1.96*R9'), self.style1)
+        
+        
+        self.main.write(1, 20, xlwt.Formula('2*I3'), self.style1)
+        self.main.write(2, 20, xlwt.Formula('SQRT(U2^2*J5)/J5'), self.style1)
+        self.main.write(3, 20, xlwt.Formula('1.96*U3'), self.style1)
         
     # 保存，使用小写save（）
     def save(self, address = r'Book_saved'):

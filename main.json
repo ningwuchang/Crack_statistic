@@ -1,12 +1,15 @@
 {
-  "path" : "E:\\54055\\Documents\\SEM_image",
+  "path" : "E:\\54055\\Documents\\SEM_image\\21.7.28 718(1 7 10)\\Processed",
   "pre": "ls_",
   "start": "1",
   "end": "30",
   "weight": "2560",
   "high": "1790",
-  "scale": "0.9921",
-  "GB": "40"
+  "scale": "0.049652",
+  "grain_size": "40",
+  "Bits": "3",
+  "Windows_x": "1000",
+  "Windows_y": "200"
 
 
 }
