@@ -51,12 +51,14 @@ class GUI(tk.Tk):
         sub_menu_items = ["file", "edit", "tools", "help"]
         self.generate_sub_menus(sub_menu_items)
         
+
+
         # self.configure(menu=self.menu)
         # self.filemenu = tk.Menu(self.menu, tearoff=0)
         # self.filemenu.add_command(label="Preference", command=self.Preference)
         # self.filemenu.add_command(label="Exit", command=self.destroy)
         # self.menu.add_cascade(label="File", menu=self.filemenu)
-        # self.config(menu=self.menu)    
+        self.config(menu=self.menu)    
         
     def generate_sub_menus(self, sub_menu_items):
         window_methods = [method_name for method_name in dir(self)
