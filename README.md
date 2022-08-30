@@ -6,6 +6,7 @@
 ## setup
 
 运行dist文件夹中的exe文件
+或是通过 Start.py 进行直接运行（需要安装Python及numpy、opencv、matplotlib等相关库）
 
 ## version
 
