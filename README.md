@@ -14,3 +14,5 @@
 ## help
 
 本代码尚未成熟，有疑问请联系作者！
+
+![image](https://user-images.githubusercontent.com/38575700/187337044-4ebe2988-57e8-4f41-aeda-3e12ebd5d471.png)
